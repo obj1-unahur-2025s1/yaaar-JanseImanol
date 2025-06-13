@@ -17,16 +17,18 @@ class Busqueda inherits Mision{
 class Leyenda inherits Mision{
     var itenNesesario
     method pirataUtil(unPirata) =  unPirata.items().size() >= 10 and unPirata.items().contains(itenNesesario)
-
-    override method barcoUtil(unBarco) {} 
+ 
 }
 
 class Saqueo inherits Mision{
-    var victima
-    var property dineroNesesario = 3
+    const victima
 
-    method pirataUtil(unPirata) =  unPirata.dinero() < dineroNesesario and
-        unPirata.estaPasado()
+    method pirataUtil(unPirata) =  unPirata.dinero() < dineroParaSaqueo.dinero() and
+        unPirata.pudeAtacar(victima)
 
     override method barcoUtil(unBarco) = super(unBarco) and victima.esVulnerable(unBarco)
+}
+
+object dineroParaSaqueo {
+    var property dinero = 3
 }
